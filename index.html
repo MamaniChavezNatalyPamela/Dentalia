@@ -160,7 +160,7 @@
   <div class="section-head"><div class="kicker">I · Generalidades y marco teórico</div><h2>Presentación del proyecto</h2><p class="lead">Este apartado describe el tema, el contexto del problema y los conceptos que orientan el análisis del sistema propuesto.</p></div>
   <div class="grid grid-2">
    <article class="card"><div class="icon">📘</div><h3>Introducción</h3><p>La gestión de un consultorio dental requiere organizar información administrativa y clínica que se genera durante la atención. Cuando los datos de pacientes, citas, consultas y tratamientos se registran en diferentes soportes, pueden aparecer duplicaciones, demoras para localizar antecedentes y dificultades para dar seguimiento a la atención. Este proyecto propone analizar y diseñar un sistema de información que centralice esos registros y facilite su consulta por usuarios autorizados. El trabajo se desarrollará aplicando análisis estructurado y orientación a objetos mediante UML.</p></article>
-   <article class="card"><div class="icon">🗂️</div><h3>Requerimientos</h3><p>Para nuestro caso la Odontologa Dalia Venavides, nos dijo que queria tener a la mano el registro de sus pacientes, ella lo registraba todo en cuadernos desde las citas hasta los cobros que hacia por sus servicios, se le hacia tedioso cada que necesita ver el "el historial" de cada paciente,tambien nos comento que no tenia buena organizacion en el tema de consultas que tambien tomemoes en cuenta ese aspecto.</p></article>
+   <article class="card"><div class="icon">🗂️</div><h3>Requerimientos</h3><p>Para nuestro caso la Odontologa Angela Merma, nos dijo que queria tener a la mano el registro de sus pacientes, ella lo registraba todo en cuadernos desde las citas hasta los cobros que hacia por sus servicios, se le hacia tedioso cada que necesita ver el "el historial" de cada paciente,tambien nos comento que no tenia buena organizacion en el tema de consultas que tambien tomemoes en cuenta ese aspecto.</p></article>
    <article class="card"><div class="icon">⚠️</div><h3>Planteamiento del problema</h3><p>La información de pacientes, citas y tratamientos puede encontrarse dispersa o gestionarse de manera manual, lo que dificulta la búsqueda de antecedentes, el seguimiento de citas y la elaboración de reportes. El proyecto estudiará estas dificultades y definirá cómo un sistema centralizado podría apoyar el control de gestión y la continuidad del registro clínico.</p></article>
    <article class="card"><div class="icon">🎯</div><h3>Formulación del problema</h3><p><strong>¿Cómo puede el análisis y diseño de un sistema de información contribuir a mejorar la organización de la gestión y el registro del historial clínico en un consultorio dental?</strong></p></article>
   </div>
@@ -225,7 +225,7 @@
   <div class="section-head"><div class="kicker">Planificación</div><h2>Fases y actividades</h2><p class="lead">Cronograma de referencia para organizar el trabajo. Ajustar las fechas a las entregas reales y registrar los avances de cada integrante.</p></div>
   <div class="timeline">
    <div class="timeline-item"><strong>Fase 1 · Selección y delimitación del tema</strong><p>Definir el problema, el objetivo general, los objetivos específicos y el alcance inicial.</p><span class="pill">Producto: perfil del proyecto</span></div>
-   <div class="timeline-item"><strong>Fase 2 · Investigación y marco teórico</strong><p>Revisar bibliografía y recopilar información sobre los procesos del consultorio, si se dispone de acceso.</p><span class="pill">Producto: generalidades y marco teórico</span></div>
+   <div class="timeline-item"><strong>Fase 2 · Investigación y marco teórico</strong><p>Revisar bibliografía y recopilar información sobre los procesos del consultorio. </p><span class="pill">Producto: generalidades y marco teórico</span></div>
    <div class="timeline-item"><strong>Fase 3 · Análisis estructurado</strong><p>Describir procesos, actores externos, entradas, salidas, almacenes y flujos de información.</p><span class="pill">Producto: modelos estructurados</span></div>
    <div class="timeline-item"><strong>Fase 4 · Análisis y diseño orientado a objetos</strong><p>Definir casos de uso, clases, relaciones y secuencias de interacción.</p><span class="pill">Producto: diagramas UML</span></div>
    <div class="timeline-item"><strong>Fase 5 · Sitio web y revisión incremental</strong><p>Publicar los apartados completados, revisar enlaces, corregir redacción y validar los diagramas.</p><span class="pill">Producto: sitio web del proyecto</span></div>
@@ -241,10 +241,10 @@
   <div class="diagram">
    <div class="flow">
     <div class="flow-node">Paciente<br><span class="small">Solicita cita y brinda datos</span></div><div class="arrow">⇄</div>
-    <div class="flow-node" style="background:#e4f5f2;border-color:#80c9c1">Sistema DentalGest<br><span class="small">Gestiona registros e información</span></div><div class="arrow">⇄</div>
+    <div class="flow-node" style="background:#e4f5f2;border-color:#80c9c1">Sistema Dentalia<br><span class="small">Gestiona registros e información</span></div><div class="arrow">⇄</div>
     <div class="flow-node">Odontólogo<br><span class="small">Consulta y actualiza registros clínicos</span></div>
    </div>
-   <div class="flow" style="margin-top:12px"><div class="flow-node">Personal administrativo<br><span class="small">Agenda citas y gestiona datos autorizados</span></div><div class="arrow">⇄</div><div class="flow-node">Sistema DentalGest<br><span class="small">Reportes y agenda</span></div></div>
+   <div class="flow" style="margin-top:12px"><div class="flow-node">Personal administrativo<br><span class="small">Agenda citas y gestiona datos autorizados</span></div><div class="arrow">⇄</div><div class="flow-node">Sistema Dentalia<br><span class="small">Reportes y agenda</span></div></div>
   </div>
   <p class="small">Intercambios sugeridos: datos de paciente, solicitud y confirmación de cita, datos de consulta, tratamiento, actualización del historial y reportes. Definir exactamente qué usuario puede acceder a cada dato.</p>
   <h3 style="margin-top:28px">Descomposición de procesos de nivel superior</h3>
