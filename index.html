@@ -1,430 +1,292 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Proyecto académico de Análisis y Diseño de Sistemas: Control de Gestión e Historial Clínico para un Consultorio Dental.">
-  <title>Dentalia| Proyecto de Análisis y Diseño de Sistemas</title>
-  <style>
-    :root{
-      --navy:#12334a; --blue:#176b87; --teal:#1d9a91; --mint:#e9f7f5;
-      --paper:#f5f8fb; --ink:#203242; --muted:#607384; --line:#dce6ec;
-      --white:#fff; --gold:#f0b44d; --shadow:0 12px 32px rgba(18,51,74,.09);
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth;scroll-padding-top:92px}
-    body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--paper);color:var(--ink);line-height:1.7}
-    a{color:var(--blue)}
-    .topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-    .navwrap{max-width:1180px;margin:auto;padding:12px 22px;display:flex;align-items:center;gap:24px}
-    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--navy);font-weight:800;letter-spacing:-.3px;white-space:nowrap}
-    .logo{width:40px;height:40px;border-radius:13px;background:linear-gradient(135deg,var(--blue),var(--teal));display:grid;place-items:center;color:#fff;font-size:22px}
-    .navlinks{display:flex;align-items:center;gap:16px;margin-left:auto;flex-wrap:wrap}
-    .navlinks a{text-decoration:none;color:#425969;font-size:.86rem;font-weight:650}
-    .navlinks a:hover{color:var(--teal)}
-    .menu-btn{display:none;border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 11px;color:var(--navy);font-weight:700}
-    .hero{background:radial-gradient(circle at 85% 20%,rgba(29,154,145,.3),transparent 28%),linear-gradient(125deg,#102d43,#176b87);color:#fff;overflow:hidden}
-    .hero-inner{max-width:1180px;margin:auto;padding:78px 22px 70px;display:grid;grid-template-columns:1.2fr .8fr;gap:44px;align-items:center}
-    .eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:.76rem;font-weight:800;color:#8fe2d8}
-    h1{font-size:clamp(2.4rem,5vw,4.6rem);line-height:1.06;letter-spacing:-2px;margin:14px 0 22px;max-width:780px}
-    .hero p{font-size:1.08rem;max-width:720px;color:#e2eef4}
-    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 17px;border-radius:12px;text-decoration:none;font-weight:750;border:1px solid transparent;cursor:pointer}
-    .btn-primary{background:#fff;color:var(--navy)}
-    .btn-ghost{border-color:rgba(255,255,255,.45);color:#fff}
-    .hero-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:25px;padding:26px;box-shadow:0 25px 60px rgba(0,0,0,.12)}
-    .tooth-art{height:175px;display:grid;place-items:center;font-size:8rem;filter:drop-shadow(0 12px 18px rgba(0,0,0,.18))}
-    .hero-card h3{margin:0 0 6px;font-size:1.15rem}
-    .hero-card p{font-size:.92rem;margin:0}
-    .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
-    .meta div{background:rgba(255,255,255,.09);border-radius:12px;padding:12px}
-    .meta strong{display:block;font-size:.78rem;color:#a7e9e0}
-    .meta span{font-size:.86rem}
-    .container{max-width:1180px;margin:auto;padding:0 22px}
-    .section{padding:72px 0}
-    .section-white{background:#fff}
-    .section-head{max-width:760px;margin-bottom:32px}
-    .kicker{font-size:.76rem;letter-spacing:1.8px;text-transform:uppercase;font-weight:800;color:var(--teal)}
-    h2{font-size:clamp(1.8rem,3vw,2.7rem);letter-spacing:-.8px;line-height:1.18;color:var(--navy);margin:9px 0 13px}
-    h3{color:var(--navy);line-height:1.3}
-    .lead{font-size:1.08rem;color:var(--muted)}
-    .grid{display:grid;gap:18px}
-    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
-    .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:23px;box-shadow:0 5px 18px rgba(18,51,74,.035)}
-    .card p{margin-bottom:0;color:#536879}
-    .icon{width:43px;height:43px;border-radius:13px;display:grid;place-items:center;background:var(--mint);font-size:1.35rem;margin-bottom:14px}
-    .number{display:inline-grid;place-items:center;background:#e5f5f3;color:#147c76;font-weight:850;border-radius:10px;width:36px;height:36px}
-    .notice{border-left:4px solid var(--gold);background:#fff8e9;padding:16px 18px;border-radius:0 12px 12px 0;color:#674c1f}
-    .notice strong{color:#4f3915}
-    .pill{display:inline-block;padding:5px 10px;border-radius:999px;background:#e7f4f7;color:#176b87;font-size:.77rem;font-weight:800;margin:3px 5px 3px 0}
-    .toc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-    .toc a{display:flex;gap:12px;align-items:center;padding:13px 15px;border:1px solid var(--line);border-radius:12px;text-decoration:none;background:#fff;color:var(--navy);font-weight:700}
-    .toc a span{color:var(--teal);font-size:.8rem}
-    .toc a:hover{border-color:var(--teal);transform:translateY(-1px)}
-    .list-check{padding-left:0;list-style:none}
-    .list-check li{padding:7px 0 7px 28px;position:relative}
-    .list-check li:before{content:"✓";position:absolute;left:0;top:7px;color:var(--teal);font-weight:900}
-    .problem-tree{display:flex;flex-direction:column;align-items:center;gap:12px}
-    .tree-box{max-width:680px;width:100%;padding:15px 18px;text-align:center;border-radius:13px;border:1px solid var(--line);background:#fff}
-    .tree-box.core{background:#fff2e2;border-color:#edc27e;font-weight:800;color:#69491b}
-    .tree-branches{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%}
-    .tree-box small{display:block;color:var(--muted);margin-top:4px}
-    .diagram{background:#f7fafc;border:1px dashed #b9ccd7;border-radius:18px;padding:20px;overflow:auto}
-    .flow{display:flex;align-items:stretch;justify-content:center;gap:10px;flex-wrap:wrap}
-    .flow-node{min-width:130px;max-width:200px;flex:1;text-align:center;background:#fff;border:1px solid #cbdce4;border-radius:12px;padding:14px;font-weight:700;color:var(--navy)}
-    .arrow{align-self:center;color:var(--teal);font-size:1.5rem;font-weight:900}
-    .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:#fff}
-    table{width:100%;border-collapse:collapse;min-width:600px}
-    th,td{text-align:left;padding:13px 15px;border-bottom:1px solid var(--line);vertical-align:top}
-    th{background:#eef6f8;color:var(--navy);font-size:.88rem}
-    tr:last-child td{border-bottom:0}
-    .timeline{border-left:2px solid #c6e7e2;margin-left:9px;padding-left:23px}
-    .timeline-item{position:relative;padding:0 0 22px}
-    .timeline-item:before{content:"";position:absolute;left:-30px;top:5px;width:12px;height:12px;background:var(--teal);border:3px solid #dff5f1;border-radius:50%}
-    .timeline-item strong{color:var(--navy)}
-    .class-diagram{display:grid;grid-template-columns:repeat(3,minmax(160px,1fr));gap:12px;min-width:540px}
-    .uml-class{border:1.5px solid #648395;background:#fff;border-radius:8px;overflow:hidden;font-family:Consolas,monospace;font-size:.84rem}
-    .uml-class h4{background:#e5f1f5;margin:0;padding:10px;text-align:center;color:#12334a;border-bottom:1.5px solid #648395}
-    .uml-class div{padding:10px;border-bottom:1px solid #dce6ec;min-height:55px}
-    .uml-class div:last-child{border-bottom:0}
-    .small{font-size:.88rem;color:var(--muted)}
-    .reference-list li{margin:8px 0}
-    .footer{background:#102d43;color:#d8e7ee;padding:32px 22px}
-    .footer-inner{max-width:1180px;margin:auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-    .footer p{margin:4px 0}
-    .toplink{color:#a8e8e0;text-decoration:none;font-weight:700}
-    .edit-tag{font-size:.75rem;font-weight:800;color:#8a5b08;background:#fff3d7;border:1px solid #f0d69d;border-radius:7px;padding:3px 7px}
-    @media(max-width:900px){.navlinks{display:none;position:absolute;top:64px;left:0;right:0;background:#fff;padding:18px 22px;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}.navlinks.open{display:grid;grid-template-columns:repeat(2,1fr)}.menu-btn{display:block;margin-left:auto}.hero-inner{grid-template-columns:1fr;padding-top:55px}.hero-card{max-width:540px}.grid-4{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:600px){.section{padding:52px 0}.grid-2,.grid-3,.grid-4,.toc,.tree-branches{grid-template-columns:1fr}.meta{grid-template-columns:1fr}.hero-inner{padding-top:42px}.hero-card{padding:20px}.tooth-art{height:120px;font-size:6rem}h1{letter-spacing:-1px}.navwrap{padding:10px 15px}.container{padding:0 16px}}
-    @media print{.topbar,.hero-actions,.menu-btn,.toplink{display:none!important}.hero{background:#fff;color:#12334a}.hero p,.hero-card p{color:#425969}.hero-inner{padding:30px 0;display:block}.hero-card{border:1px solid #bbb;color:#12334a;margin-top:20px}.tooth-art{display:none}.section{padding:30px 0;break-inside:avoid}.card{box-shadow:none;break-inside:avoid}body{background:#fff}.footer{background:#fff;color:#12334a;border-top:1px solid #ccc}}
-  </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dentalia | Gestión Odontológica</title>
+<style>
+:root{--p:#087f8c;--pd:#065e68;--bg:#f3f8f8;--ink:#193b42;--muted:#63777b;--line:#dce8e8;--soft:#e5f4f2}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px Arial,sans-serif;line-height:1.6}
+header{position:sticky;top:0;z-index:5;background:#ffffffed;border-bottom:1px solid var(--line)}
+.nav{max-width:1120px;margin:auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-size:1.35rem;font-weight:bold;color:var(--pd);text-decoration:none}.brand span{background:var(--soft);padding:9px;border-radius:10px;margin-right:8px}
+nav{display:flex;align-items:center;gap:5px}nav a, .dropbtn{padding:10px 12px;border:0;border-radius:9px;background:none;color:var(--ink);text-decoration:none;font-weight:bold;cursor:pointer}
+nav a:hover,.dropbtn:hover{background:var(--soft)}.dropdown{position:relative}.dropmenu{display:none;position:absolute;top:100%;left:0;background:white;min-width:220px;padding:8px;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 25px #1233}
+.dropdown.open .dropmenu{display:block}.dropmenu button{display:block;width:100%;text-align:left;border:0;background:white;padding:10px;border-radius:8px;cursor:pointer}.dropmenu button:hover{background:var(--soft)}
+.btn{background:var(--p);color:white;border:0;border-radius:10px;padding:11px 16px;font-weight:bold;cursor:pointer}.btn:hover{background:var(--pd)}
+#menu{display:none}main{max-width:1120px;margin:auto;padding:24px 20px 55px}
+.hero{background:linear-gradient(120deg,#e1f3f1,#f9fcfc);padding:52px;border-radius:24px;margin:12px 0 30px;display:flex;align-items:center;justify-content:space-between;gap:25px}
+.hero h1{font-size:clamp(2rem,4vw,3.2rem);line-height:1.15;margin:14px 0;color:#123b42}.hero p{max-width:690px;color:var(--muted)}
+.eyebrow,.kicker{color:var(--p);font-size:.8rem;font-weight:bold;letter-spacing:1px;text-transform:uppercase}
+.tooth{font-size:7rem;background:white;border-radius:45%;padding:24px;color:var(--p);box-shadow:0 15px 35px #087f8c22}
+section{margin:32px 0}.head{margin-bottom:16px}.head h2{margin:4px 0;font-size:1.8rem}.head p,.card p{color:var(--muted);margin:0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.two{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:17px;padding:21px;box-shadow:0 5px 18px #123309}
+.card h3{margin:8px 0}.ico{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--soft);font-size:1.3rem}
+.panel{padding:22px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.tab{border:1px solid var(--line);background:white;border-radius:9px;padding:10px 14px;font-weight:bold;cursor:pointer}.tab.active{background:var(--p);color:white}
+.tabcontent{display:none}.tabcontent.active{display:block}.items{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.item{border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:10px}.item small{display:block;color:var(--muted)}
+.smallbtn{border:1px solid #a9cfcc;background:var(--soft);color:var(--pd);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:bold}
+.viewer{margin-top:16px;padding:22px;text-align:center;border:1px dashed #a9c9c7;border-radius:12px;color:var(--muted);background:#f8fcfc}.viewer strong{display:block;color:var(--ink)}
+.note{background:#fff7e5;border:1px solid #efdfb8;border-radius:11px;padding:13px;color:#755a22;margin-top:15px}
+footer{background:#103e45;color:#e0f1f1;padding:28px 20px}footer div{max-width:1120px;margin:auto}footer p{color:#b8d2d3;margin:5px 0}
+.modalbg{display:none;position:fixed;inset:0;background:#001e25aa;z-index:10;align-items:center;justify-content:center;padding:15px}.modalbg.show{display:flex}.modal{background:white;padding:25px;border-radius:18px;width:min(430px,100%);position:relative}.close{position:absolute;right:15px;top:12px;border:0;padding:7px;border-radius:8px;cursor:pointer}
+.field{margin:12px 0}.field label{display:block;font-weight:bold;margin-bottom:5px}.field input,.field select{width:100%;padding:11px;border:1px solid #cbdada;border-radius:9px}.result{display:none;background:var(--soft);padding:13px;border-radius:10px;margin-top:12px}.result.show{display:block}
+@media(max-width:850px){.nav{flex-wrap:wrap}#menu{display:block;margin-left:auto;padding:8px 12px;background:white;border:1px solid var(--line);border-radius:8px}nav{display:none;flex-basis:100%;flex-direction:column;align-items:stretch}nav.mobile{display:flex}nav a,.dropbtn{text-align:left;width:100%}.dropmenu{position:static;box-shadow:none}.hero{padding:32px}.tooth{display:none}.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){main{padding:16px 13px 40px}.hero{padding:27px 22px}.grid,.two,.items{grid-template-columns:1fr}.item{align-items:flex-start;flex-direction:column}}
+
+/* Navegación desplegable al estilo de un portal: aparece al pasar el cursor */
+@media (hover:hover) and (min-width:851px) {
+  .dropdown:hover .dropmenu, .dropdown:focus-within .dropmenu {display:block}
+  .dropdown:hover > .dropbtn, .dropdown:focus-within > .dropbtn {background:var(--soft)}
+}
+.dropmenu {z-index:20}
+[hidden] {display:none !important}
+.material-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:8px 0 22px}
+.back-btn{border:1px solid var(--line);background:#fff;color:var(--pd);padding:10px 15px;border-radius:10px;font-weight:bold;cursor:pointer}
+.back-btn:hover{background:var(--soft)}
+.material-heading{padding:34px;background:linear-gradient(120deg,#e1f3f1,#fff);border:1px solid var(--line);border-radius:20px;margin-bottom:22px}
+.material-heading h1{font-size:clamp(2rem,4vw,2.8rem);line-height:1.15;margin:5px 0 10px;color:#123b42}
+.material-heading p{color:var(--muted);margin:0;max-width:760px}
+.material-panel{background:white;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 5px 18px #123309}
+.material-panel-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:20px}
+.material-panel-head h2{margin:3px 0}
+.material-tag{background:var(--soft);color:var(--pd);border-radius:30px;padding:7px 12px;font-size:.82rem;font-weight:bold}
+.material-placeholder{min-height:330px;border:2px dashed #a9c9c7;border-radius:14px;background:#f8fcfc;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px}
+.material-placeholder-icon{font-size:3rem;color:var(--p)}
+.material-placeholder h3{margin:8px 0;color:var(--ink)}
+.material-placeholder p{max-width:520px;color:var(--muted);margin:0}
+@media(max-width:600px){.material-toolbar,.material-panel-head{align-items:flex-start;flex-direction:column}.material-heading{padding:25px 20px}.material-panel{padding:17px}.material-placeholder{min-height:260px}}
+
+
+:root{--p:#0AA6A6;--pd:#087C83;--bg:#F3FBFC;--ink:#163B52;--muted:#607D8B;--line:#D6EAEE;--soft:#E1F7F6;--accent:#FF8A65;--accent-dark:#F26D45;--navy:#123B66;--sky:#48B9E8;--white:#fff}
+html{scroll-behavior:smooth;scroll-padding-top:105px}
+body{background:linear-gradient(180deg,#f4fbff 0%,#f3fbfc 45%,#fff 100%);color:var(--ink)}
+header{background:rgba(255,255,255,.94);backdrop-filter:blur(14px);box-shadow:0 5px 24px #123b660b;border-bottom:1px solid #dceef2}
+.nav{padding-top:12px;padding-bottom:12px}
+.brand{color:var(--navy);letter-spacing:.5px;font-size:1.4rem}
+.brand span{background:linear-gradient(135deg,var(--p),var(--sky));color:white;box-shadow:0 6px 14px #0aa6a633}
+nav{gap:7px}
+nav a,.dropbtn{font-size:.92rem;transition:background .2s,color .2s,transform .2s}
+nav a:hover,.dropbtn:hover{background:#e6f8f8;color:var(--pd);transform:translateY(-1px)}
+.dropmenu{min-width:250px;padding:9px;background:#fff;border:1px solid #dceef2;border-radius:15px;box-shadow:0 18px 42px #123b6620;animation:menuIn .18s ease-out}
+.dropmenu button{padding:11px 12px;color:var(--ink);font-size:.92rem;transition:background .18s,transform .18s}
+.dropmenu button:hover{background:linear-gradient(90deg,#e3f8f7,#f2fbff);color:var(--pd);transform:translateX(3px)}
+.btn{background:linear-gradient(135deg,var(--p),var(--pd));box-shadow:0 8px 18px #0aa6a633;transition:transform .2s,box-shadow .2s,filter .2s}
+.btn:hover{background:linear-gradient(135deg,var(--accent),var(--accent-dark));box-shadow:0 10px 24px #ff8a6538;transform:translateY(-2px)}
+main{padding-top:28px}
+.hero{position:relative;overflow:hidden;background:linear-gradient(120deg,#d8f7f4 0%,#e8f7ff 56%,#fff1e9 100%);border:1px solid #d5eff0;box-shadow:0 14px 38px #0a829014;padding:clamp(28px,5vw,58px);border-radius:28px}
+.hero:after{content:"";position:absolute;width:330px;height:330px;right:-100px;top:-120px;border-radius:50%;background:radial-gradient(circle,#56d4cf55,transparent 68%);pointer-events:none}
+.hero h1{color:var(--navy);letter-spacing:-1.2px}
+.hero p{font-size:1.05rem;color:#4e6c7a}
+.hero .btn{display:inline-flex;margin-top:8px;text-decoration:none}
+.tooth{font-size:6rem;color:white;background:linear-gradient(145deg,#0aa6a6,#45b9e8);box-shadow:0 20px 38px #0a829022;animation:float 4s ease-in-out infinite}
+.eyebrow,.kicker{color:var(--pd)}
+.head h2{color:var(--navy);letter-spacing:-.4px}
+.card,.panel{border-color:#dceef2;box-shadow:0 7px 22px #123b6608;transition:transform .22s,box-shadow .22s,border-color .22s}
+.card:hover{transform:translateY(-5px);box-shadow:0 16px 32px #123b6614;border-color:#9cdddd}
+.ico{background:linear-gradient(135deg,#e2f9f6,#eaf7ff);color:var(--pd)}
+.tabs{gap:10px}
+.tab{transition:all .2s;border-color:#d6eaee;color:var(--ink)}
+.tab:hover{transform:translateY(-1px);border-color:var(--p);color:var(--pd)}
+.tab.active{background:linear-gradient(135deg,var(--p),var(--pd));border-color:transparent;box-shadow:0 7px 16px #0aa6a633}
+.item{background:linear-gradient(145deg,#fff,#fbfeff);border-color:#dceef2;transition:transform .2s,border-color .2s,box-shadow .2s}
+.item:hover{transform:translateY(-3px);border-color:#86d6d4;box-shadow:0 10px 22px #0a829010}
+.smallbtn{background:#e5f8f6;border-color:#a6dedd;color:var(--pd);transition:all .2s}
+.smallbtn:hover{background:linear-gradient(135deg,var(--p),var(--pd));border-color:transparent;color:white;transform:translateY(-1px)}
+.viewer{background:linear-gradient(135deg,#f3fbff,#f0fbf8);border-color:#a8dedd}
+.note{background:#fff4eb;border-color:#ffd4bd;color:#895337}
+footer{background:linear-gradient(120deg,#123b66,#087c83);color:white}
+footer p{color:#d5f0f2}
+.material-heading{background:linear-gradient(120deg,#d8f7f4,#e8f7ff 65%,#fff1e9);border-color:#d5eff0}
+.material-heading h1{color:var(--navy)}
+.material-panel{border-color:#dceef2;box-shadow:0 10px 28px #123b6609}
+.material-placeholder{background:linear-gradient(135deg,#f5fcff,#f2fbf8);border-color:#a6dedd}
+.material-placeholder-icon{color:var(--p)}
+.material-tag{background:#e4f8f6;color:var(--pd)}
+.back-btn{transition:all .2s}
+.back-btn:hover{background:var(--p);color:white;border-color:var(--p);transform:translateY(-1px)}
+.modal{box-shadow:0 24px 70px #001e2540}
+.close:hover{background:#e9f8f7;color:var(--pd)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes menuIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media(max-width:850px){nav a,.dropbtn{border-radius:10px}nav.mobile{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px;box-shadow:0 10px 25px #123b6610}.dropdown.open .dropmenu{background:#f7fcfd;border-radius:12px}.hero{border-radius:22px}}
+@media(max-width:600px){.material-toolbar,.material-panel-head{align-items:flex-start;flex-direction:column}.material-heading{padding:25px 20px}.material-panel{padding:17px}.material-placeholder{min-height:260px}}
+.dental-strip{display:flex;justify-content:center;align-items:center;gap:12px;padding:7px 14px;background:linear-gradient(90deg,#087c83,#0aa6a6 55%,#48b9e8);color:#fff;font-size:.78rem;font-weight:700;letter-spacing:.25px;text-align:center}
+.dental-strip span:first-child{background:#ffffff22;padding:2px 9px;border-radius:20px}
+@media(max-width:600px){.dental-strip{font-size:.7rem;gap:7px;flex-wrap:wrap}}
+@media(hover:hover) and (min-width:851px){.dropdown:hover .dropmenu,.dropdown:focus-within .dropmenu{display:block}.dropdown:hover>.dropbtn,.dropdown:focus-within>.dropbtn{background:var(--soft)}}
+.dropmenu{z-index:20}
+[hidden]{display:none!important}
+
+</style>
 </head>
 <body>
-<header class="topbar">
-  <div class="navwrap">
-    <a class="brand" href="#inicio"><span class="logo">✚</span><span>Dentalia</span></a>
-    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-label="Abrir menú">☰ Menú</button>
-    <nav class="navlinks" id="navlinks" aria-label="Navegación principal">
-      <a href="#contenido">Contenido</a><a href="#generalidades">Generalidades</a><a href="#investigacion">Investigación</a><a href="#estructurado">Análisis estructurado</a><a href="#uml">UML</a><a href="#propuesta">Sistema propuesto</a><a href="#referencias">Referencias</a>
-    </nav>
-  </div>
-</header>
-
+<div class="dental-strip"><span>✦ DENTALIA</span><span>Proyecto académico · Análisis y diseño de un sistema odontológico</span></div>
+<header><div class="nav">
+<a class="brand" href="#inicio"><span>✚</span>DENTALIA</a><button id="menu">☰</button>
+<nav id="nav">
+<a href="#inicio">Inicio</a><a href="#proyecto">Proyecto</a>
+<div class="dropdown"><button class="dropbtn">Análisis estructurado ▾</button><div class="dropmenu">
+<button class="material-link" data-material="Modelo ambiental" data-category="estructurado">Modelo ambiental</button><button class="material-link" data-material="Diagrama de contexto" data-category="estructurado">Diagrama de contexto</button><button class="material-link" data-material="DFD niveles 0, 1 y 2" data-category="estructurado">DFD niveles 0, 1 y 2</button><button class="material-link" data-material="Entidad–relación" data-category="estructurado">Entidad–relación</button><button class="material-link" data-material="Diccionario de datos" data-category="estructurado">Diccionario de datos</button></div></div>
+<div class="dropdown"><button class="dropbtn">Diseño UML ▾</button><div class="dropmenu">
+<button class="material-link" data-material="Casos de uso" data-category="uml">Casos de uso</button><button class="material-link" data-material="Diagrama de clases" data-category="uml">Diagrama de clases</button><button class="material-link" data-material="Diagramas de secuencia" data-category="uml">Diagramas de secuencia</button><button class="material-link" data-material="Diagramas de actividad" data-category="uml">Diagramas de actividad</button></div></div>
+<a href="#roles">Roles</a><a href="#tutoriales">Tutoriales</a><button class="btn" id="open">Iniciar sesión</button>
+</nav></div></header>
 <main>
-<section class="hero" id="inicio">
-  <div class="hero-inner">
-    <div>
-      <div class="eyebrow">Proyecto del Semestre· Análisis y Diseño de Sistemas</div>
-      <h1>Control de Gestión e Historial Clínico para un Consultorio Dental</h1>
-      <p>Propuesta de análisis y diseño de un sistema de información orientado a organizar la gestión del consultorio y centralizar el historial clínico de los pacientes.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#generalidades">Explorar el proyecto ↓</a>
-        <a class="btn btn-ghost" href="#planificacion">Ver planificación</a>
-      </div>
-      <div class="meta">
-        <div><strong>ASIGNATURA</strong><span>Análisis y Diseño de Sistemas</span></div>
-        <div><strong>PARADIGMAS</strong><span>Estructurado y orientado a objetos</span></div>
-        <div><strong>GESTIÓN</strong><span>2026 · Segundo semestre</span></div>
-      </div>
+<div id="home-view">
+<section class="hero" id="inicio"><div><span class="eyebrow">Proyecto académico · Análisis y Diseño</span><h1>Una mejor organización para el cuidado dental.</h1>
+<p>Dentalia es una propuesta de sistema para apoyar la gestión de pacientes, citas e información clínica de un consultorio dental, facilitando el acceso ordenado a los datos según el rol de cada usuario.</p>
+<a class="btn" href="#proyecto">Conocer el proyecto</a></div><div class="tooth">✦</div></section>
+<section id="proyecto"><div class="head"><span class="kicker">01 · Presentación</span><h2>Sobre el proyecto</h2><p>Control de Gestión e Historial Clínico para un Consultorio Dental.</p></div>
+<div class="two"><article class="card"><div class="ico">⌕</div><h3>¿Qué busca Dentalia?</h3><p>Organizar la información del consultorio, apoyar el registro y seguimiento de citas y mantener disponible el historial clínico para el personal autorizado.</p></article>
+<article class="card"><div class="ico">◎</div><h3>Objetivo general</h3><p>Analizar y diseñar un sistema de gestión e historial clínico que contribuya al control de pacientes, citas y atenciones odontológicas.</p></article></div></section>
+<section id="analisis"><div class="head"><span class="kicker">02 · Desarrollo del sistema</span><h2>Análisis y diseño</h2><p>Selecciona una metodología para consultar los diagramas. Los espacios se completan con los archivos finales del equipo.</p></div>
+<div class="panel"><div class="tabs"><button class="tab active" data-show="estructurado">Análisis estructurado</button><button class="tab" data-show="uml">Análisis orientado a objetos (UML)</button></div>
+<div class="tabcontent active" id="estructurado"><div class="items">
+<div class="item"><div><b>Modelo ambiental</b><small>Entorno y límites del sistema.</small></div><button class="smallbtn material-link" data-material="Modelo ambiental" data-category="estructurado">Ver material</button></div>
+<div class="item"><div><b>Diagrama de contexto</b><small>Actores y sistema principal.</small></div><button class="smallbtn material-link" data-material="Diagrama de contexto" data-category="estructurado">Ver material</button></div>
+<div class="item"><div><b>DFD nivel 0</b><small>Procesos y flujos generales.</small></div><button class="smallbtn material-link" data-material="DFD nivel 0" data-category="estructurado">Ver material</button></div>
+<div class="item"><div><b>DFD nivel 1</b><small>Descomposición de procesos.</small></div><button class="smallbtn material-link" data-material="DFD nivel 1" data-category="estructurado">Ver material</button></div>
+<div class="item"><div><b>DFD nivel 2</b><small>Detalle de un proceso.</small></div><button class="smallbtn material-link" data-material="DFD nivel 2" data-category="estructurado">Ver material</button></div>
+<div class="item"><div><b>Entidad–relación</b><small>Entidades y relaciones de datos.</small></div><button class="smallbtn material-link" data-material="Diagrama entidad-relación" data-category="estructurado">Ver material</button></div>
+<div class="item"><div><b>Diccionario de datos</b><small>Descripción de los datos.</small></div><button class="smallbtn material-link" data-material="Diccionario de datos" data-category="estructurado">Ver material</button></div></div>
+<div class="viewer"><strong>Área de visualización</strong>Selecciona “Ver material” para mostrar aquí el espacio destinado al diagrama.</div></div>
+<div class="tabcontent" id="uml"><div class="items">
+<div class="item"><div><b>Casos de uso</b><small>Actores y funcionalidades.</small></div><button class="smallbtn material-link" data-material="Diagrama de casos de uso" data-category="uml">Ver material</button></div>
+<div class="item"><div><b>Diagrama de clases</b><small>Clases, atributos y relaciones.</small></div><button class="smallbtn material-link" data-material="Diagrama de clases" data-category="uml">Ver material</button></div>
+<div class="item"><div><b>Diagramas de secuencia</b><small>Interacción entre objetos.</small></div><button class="smallbtn material-link" data-material="Diagramas de secuencia" data-category="uml">Ver material</button></div>
+<div class="item"><div><b>Diagramas de actividad</b><small>Flujo de actividades.</small></div><button class="smallbtn material-link" data-material="Diagramas de actividad" data-category="uml">Ver material</button></div></div>
+<div class="viewer"><strong>Área de visualización UML</strong>Selecciona “Ver material” para mostrar aquí el espacio destinado al diagrama.</div></div></div></section>
+<section id="roles"><div class="head"><span class="kicker">03 · Acceso al sistema</span><h2>Roles y responsabilidades</h2><p>El acceso a la información se organiza según las funciones de cada participante.</p></div>
+<div class="grid"><article class="card"><div class="ico">☺</div><h3>Paciente</h3><p>Solicita o consulta sus citas y revisa la información propia que el sistema permita mostrar.</p></article>
+<article class="card"><div class="ico">✚</div><h3>Odontólogo</h3><p>Consulta la agenda y la información clínica autorizada; registra consultas, diagnósticos y tratamientos.</p></article>
+<article class="card"><div class="ico">▤</div><h3>Recepcionista</h3><p>Registra pacientes, gestiona citas, pagos y comprobantes, y consulta reportes administrativos.</p></article></div></section>
+<section id="tutoriales"><div class="head"><span class="kicker">04 · Recursos de apoyo</span><h2>Tutoriales y documentación</h2><p>Se pueden publicar videos breves que expliquen cómo se elaboró cada diagrama.</p></div>
+<div class="two"><article class="card"><div class="ico">▶</div><h3>Diagramas estructurados</h3><p>Espacio para insertar videos sobre modelo ambiental, contexto y DFD.</p></article><article class="card"><div class="ico">▶</div><h3>Diagramas UML</h3><p>Espacio para insertar videos sobre casos de uso, clases y secuencia.</p></article></div>
+<div class="note">Antes de publicar la versión final, reemplacen los espacios de ejemplo por los diagramas, documentos y videos definitivos.</div></section>
+<section><div class="head"><span class="kicker">05 · Información académica</span><h2>Documentación del proyecto</h2></div><div class="panel"><p>La documentación debe incluir las generalidades, el marco teórico, la planificación, el análisis estructurado y el análisis orientado a objetos.</p><ul><li>Introducción, antecedentes y planteamiento del problema.</li><li>Objetivos, justificación, alcance y metodología.</li><li>Planificación por fases, actividades y cronograma.</li><li>Diagramas, diccionario de datos y explicaciones.</li></ul></div></section>
+</div>
+<section id="material-view" hidden aria-live="polite">
+  <div class="material-toolbar">
+    <button class="back-btn" id="back-home">← Volver al inicio</button>
+    <span class="kicker" id="material-category">MATERIAL DEL PROYECTO</span>
+  </div>
+  <div class="material-heading">
+    <h1 id="material-title">Título del material</h1>
+    <p id="material-description">Descripción del contenido seleccionado.</p>
+  </div>
+  <div class="material-panel">
+    <div class="material-panel-head">
+      <div><span class="kicker">VISUALIZACIÓN</span><h2 id="material-panel-title">Contenido</h2></div>
+      <span class="material-tag">Dentalia · Análisis y diseño</span>
     </div>
-    <aside class="hero-card">
-      <div class="tooth-art" aria-hidden="true">🦷</div>
-      <h3>Una gestión dental más organizada</h3>
-      <p>El proyecto estudia cómo apoyar el registro de pacientes, las citas, las consultas y los tratamientos mediante información ordenada, accesible para personal autorizado y protegida.</p>
-    </aside>
-  </div>
-</section>
-
-<section class="section section-white" id="contenido">
- <div class="container">
-  <div class="section-head"><div class="kicker">Guía del sitio</div><h2>Contenido del proyecto</h2><p class="lead">La documentación se organiza en las generalidades y marco teórico, el análisis estructurado y el análisis y diseño orientado a objetos, de acuerdo con la consigna de la asignatura.</p></div>
-  <div class="toc">
-   <a href="#generalidades"><span>01</span> Generalidades y marco teórico</a>
-   <a href="#investigacion"><span>02</span> Problema y objetivos de investigación</a>
-   <a href="#metodo"><span>03</span> Método, instrumentos y alcance</a>
-   <a href="#planificacion"><span>04</span> Planificación de actividades</a>
-   <a href="#estructurado"><span>05</span> Análisis y diseño estructurado</a>
-   <a href="#uml"><span>06</span> Análisis y diseño orientado a objetos</a>
-   <a href="#propuesta"><span>07</span> Sistema propuesto y requisitos</a>
-   <a href="#seguridad"><span>08</span> Seguridad, privacidad y límites</a>
-   <a href="#conclusiones"><span>09</span> Conclusiones y resultados esperados</a>
-   <a href="#referencias"><span>10</span> Referencias y datos del equipo</a>
-  </div>
- </div>
-</section>
-
-<section class="section" id="generalidades">
- <div class="container">
-  <div class="section-head"><div class="kicker">I · Generalidades y marco teórico</div><h2>Presentación del proyecto</h2><p class="lead">Este apartado describe el tema, el contexto del problema y los conceptos que orientan el análisis del sistema propuesto.</p></div>
-  <div class="grid grid-2">
-   <article class="card"><div class="icon">📘</div><h3>Introducción</h3><p>La gestión de un consultorio dental requiere organizar información administrativa y clínica que se genera durante la atención. Cuando los datos de pacientes, citas, consultas y tratamientos se registran en diferentes soportes, pueden aparecer duplicaciones, demoras para localizar antecedentes y dificultades para dar seguimiento a la atención. Este proyecto propone analizar y diseñar un sistema de información que centralice esos registros y facilite su consulta por usuarios autorizados. El trabajo se desarrollará aplicando análisis estructurado y orientación a objetos mediante UML.</p></article>
-   <article class="card"><div class="icon">🗂️</div><h3>Requerimientos</h3><p>Para nuestro caso la Odontologa Angela Merma, nos dijo que queria tener a la mano el registro de sus pacientes, ella lo registraba todo en cuadernos desde las citas hasta los cobros que hacia por sus servicios, se le hacia tedioso cada que necesita ver el "el historial" de cada paciente,tambien nos comento que no tenia buena organizacion en el tema de consultas que tambien tomemoes en cuenta ese aspecto.</p></article>
-   <article class="card"><div class="icon">⚠️</div><h3>Planteamiento del problema</h3><p>La información de pacientes, citas y tratamientos puede encontrarse dispersa o gestionarse de manera manual, lo que dificulta la búsqueda de antecedentes, el seguimiento de citas y la elaboración de reportes. El proyecto estudiará estas dificultades y definirá cómo un sistema centralizado podría apoyar el control de gestión y la continuidad del registro clínico.</p></article>
-   <article class="card"><div class="icon">🎯</div><h3>Formulación del problema</h3><p><strong>¿Cómo puede el análisis y diseño de un sistema de información contribuir a mejorar la organización de la gestión y el registro del historial clínico en un consultorio dental?</strong></p></article>
-  </div>
-  
-  <div style="margin-top:30px" class="section-head"><div class="kicker">Marco teórico</div><h2>Conceptos fundamentales</h2></div>
-  <div class="grid grid-3">
-   <article class="card"><h3>Sistema de información</h3><p>Conjunto organizado de personas, procedimientos y recursos tecnológicos que permiten registrar, procesar, almacenar y consultar información para apoyar actividades y decisiones.</p></article>
-   <article class="card"><h3>Gestión de consultorio dental</h3><p>Organización de tareas como registro de pacientes, agenda de citas, seguimiento de consultas, tratamientos y reportes administrativos.</p></article>
-   <article class="card"><h3>Historial clínico dental</h3><p>Registro organizado de antecedentes relevantes, consultas, evaluaciones, diagnósticos y tratamientos realizados o planificados por profesionales autorizados.</p></article>
-   <article class="card"><h3>Análisis estructurado</h3><p>Enfoque que describe qué hace el sistema mediante procesos, entradas, salidas, almacenes de datos y flujos de información.</p></article>
-   <article class="card"><h3>Orientación a objetos</h3><p>Enfoque que representa el dominio mediante objetos con atributos y operaciones, agrupados en clases que colaboran para cumplir responsabilidades.</p></article>
-   <article class="card"><h3>UML</h3><p>Lenguaje de modelado visual que permite representar, entre otros aspectos, actores, casos de uso, clases, interacciones y actividades de un sistema.</p></article>
-  </div>
- </div>
-</section>
-
-<section class="section section-white" id="investigacion">
- <div class="container">
-  <div class="section-head"><div class="kicker">Investigación</div><h2>Problema, objetivos y justificación</h2></div>
-  <div class="grid grid-2">
-   <article class="card"><h3>Objetivo general</h3><p>Analizar y diseñar un sistema de control de gestión e historial clínico para un consultorio dental, aplicando el análisis estructurado y el paradigma orientado a objetos con UML, con el propósito de definir una solución organizada para administrar información de pacientes, citas, consultas y tratamientos.</p></article>
-   <article class="card"><h3>Objetivos específicos</h3><ul class="list-check"><li>Identificar las necesidades y dificultades del proceso actual de gestión dental.</li><li>Reconocer a los usuarios, sus responsabilidades y la información que utilizan.</li><li>Definir requisitos funcionales y no funcionales del sistema propuesto.</li><li>Modelar procesos y flujos de información mediante análisis estructurado.</li><li>Representar la estructura y el comportamiento del sistema mediante diagramas UML.</li><li>Proponer una arquitectura funcional que permita mantener registros organizados y protegidos.</li></ul></article>
-   <article class="card"><h3>Justificación técnica</h3><p>El trabajo permite aplicar los métodos estudiados en la asignatura a un caso concreto. El modelado previo ayuda a aclarar procesos, datos, responsabilidades y límites antes de implementar software.</p></article>
-   <article class="card"><h3>Justificación práctica</h3><p>Una propuesta integrada podría reducir la duplicación de registros, facilitar la búsqueda de información y apoyar el seguimiento de citas y tratamientos. Estos beneficios son esperados y deberán evaluarse; no se afirman como resultados ya medidos.</p></article>
-  </div>
-  <div style="margin-top:30px"><h3>Árbol de problemas (hipótesis inicial)</h3><p class="small"> Lo iremos completando </p>
-   <div class="problem-tree">
-    <div class="tree-box"><strong>EFECTOS CONSIDERADOS</strong><small>Demoras al consultar información · Seguimiento irregular · Dificultad para generar reportes</small></div>
-    <div style="color:var(--teal);font-size:1.5rem">↓</div>
-    <div class="tree-box core">PROBLEMA CENTRAL<br>Gestión dispersa de la información administrativa y clínica del consultorio dental</div>
-    <div style="color:var(--teal);font-size:1.5rem">↑</div>
-    <div class="tree-branches">
-     <div class="tree-box">Registros separados<small>Información en distintos soportes</small></div>
-     <div class="tree-box">Procesos manuales<small>Búsqueda y actualización poco integradas</small></div>
-     <div class="tree-box">Falta de reportes integrados<small>Seguimiento administrativo limitado</small></div>
+    <div class="material-placeholder" id="material-placeholder">
+      <div class="material-placeholder-icon">▧</div>
+      <h3>Espacio para el material</h3>
+      <p>Aquí podrás colocar la imagen, el PDF o la explicación correspondiente a esta sección.</p>
     </div>
-   </div>
   </div>
- </div>
-</section>
-
-<section class="section" id="metodo">
- <div class="container">
-  <div class="section-head"><div class="kicker">Método y alcance</div><h2>Cómo se está llevando  a cabo la investigación</h2><p class="lead">La metodología definitiva coordinar con nuestro docente para que vea nuestra evolucion con el proyecto y si corresponde a las actividades que nuestro grupo pueda realizar</p></div>
-  <div class="grid grid-3">
-   <article class="card"><div class="number">1</div><h3>Revisión documental</h3><p>Consultar bibliografía de análisis de sistemas, UML, sistemas de información y gestión de registros clínicos. Registrar las fuentes utilizadas.</p></article>
-   <article class="card"><div class="number">2</div><h3>Entrevista</h3><p>Coordinar personalmente con la Odontologa para los respectivos requerimientos </p></article>
-   <article class="card"><div class="number">3</div><h3>Observación del proceso</h3><p>Observar, con autorización, cómo se registra una cita o consulta, sin fotografiar ni recopilar datos personales de pacientes.</p></article>
-   <article class="card"><div class="number">4</div><h3>Análisis de requisitos</h3><p>Organizar hallazgos, actores, entradas, salidas, reglas del negocio y requisitos priorizados.</p></article>
-   <article class="card"><div class="number">5</div><h3>Modelado</h3><p>Construir diagramas de procesos y flujos de datos, además de los diagramas UML que correspondan al alcance.</p></article>
-   <article class="card"><div class="number">6</div><h3>Validación</h3><p>Revisar la coherencia de los modelos y la propuesta con el docente y, si corresponde, con el usuario de referencia.</p></article>
-  </div>
-  <div class="grid grid-2" style="margin-top:22px">
-   <article class="card"><h3>Medios e instrumentos</h3><ul class="list-check"><li>Guía de entrevista semiestructurada.</li><li>Ficha de observación de procesos.</li><li>Ficha de revisión bibliográfica.</li><li>Herramienta de diagramación UML y diagramas de flujo.</li><li>Editor de código y navegador para publicar el sitio.</li></ul></article>
-   <article class="card"><h3>Alcance y delimitación</h3><p>Por el momento el proyecto contempla análisis y diseño de la gestión de pacientes, citas, consultas, historial clínico, tratamientos y reportes básicos.</p></article>
-  </div>
- </div>
-</section>
-
-<section class="section section-white" id="planificacion">
- <div class="container">
-  <div class="section-head"><div class="kicker">Planificación</div><h2>Fases y actividades</h2><p class="lead">Cronograma de referencia para organizar el trabajo. Ajustar las fechas a las entregas reales y registrar los avances de cada integrante.</p></div>
-  <div class="timeline">
-   <div class="timeline-item"><strong>Fase 1 · Selección y delimitación del tema</strong><p>Definir el problema, el objetivo general, los objetivos específicos y el alcance inicial.</p><span class="pill">Producto: perfil del proyecto</span></div>
-   <div class="timeline-item"><strong>Fase 2 · Investigación y marco teórico</strong><p>Revisar bibliografía y recopilar información sobre los procesos del consultorio. </p><span class="pill">Producto: generalidades y marco teórico</span></div>
-   <div class="timeline-item"><strong>Fase 3 · Análisis estructurado</strong><p>Describir procesos, actores externos, entradas, salidas, almacenes y flujos de información.</p><span class="pill">Producto: modelos estructurados</span></div>
-   <div class="timeline-item"><strong>Fase 4 · Análisis y diseño orientado a objetos</strong><p>Definir casos de uso, clases, relaciones y secuencias de interacción.</p><span class="pill">Producto: diagramas UML</span></div>
-   <div class="timeline-item"><strong>Fase 5 · Sitio web y revisión incremental</strong><p>Publicar los apartados completados, revisar enlaces, corregir redacción y validar los diagramas.</p><span class="pill">Producto: sitio web del proyecto</span></div>
-   <div class="timeline-item"><strong>Fase 6 · Preparación de entrega y defensa</strong><p>Consolidar la versión impresa, revisar formato, preparar presentación y practicar la explicación de los modelos.</p><span class="pill">Producto: documentación final</span></div>
-  </div>
- </div>
-</section>
-
-<section class="section" id="estructurado">
- <div class="container">
-  <div class="section-head"><div class="kicker">II · Análisis y diseño estructurado</div><h2>Procesos y flujos de información</h2><p class="lead">Los modelos siguientes son una primera propuesta conceptual. Deben validarse y, para la entrega final, dibujarse con una herramienta automatizada y con notación consistente.</p></div>
-  <h3>Diagrama de contexto (representación preliminar)</h3>
-  <div class="diagram">
-   <div class="flow">
-    <div class="flow-node">Paciente<br><span class="small">Solicita cita y brinda datos</span></div><div class="arrow">⇄</div>
-    <div class="flow-node" style="background:#e4f5f2;border-color:#80c9c1">Sistema Dentalia<br><span class="small">Gestiona registros e información</span></div><div class="arrow">⇄</div>
-    <div class="flow-node">Odontólogo<br><span class="small">Consulta y actualiza registros clínicos</span></div>
-   </div>
-   <div class="flow" style="margin-top:12px"><div class="flow-node">Personal administrativo<br><span class="small">Agenda citas y gestiona datos autorizados</span></div><div class="arrow">⇄</div><div class="flow-node">Sistema Dentalia<br><span class="small">Reportes y agenda</span></div></div>
-  </div>
-  <p class="small">Intercambios sugeridos: datos de paciente, solicitud y confirmación de cita, datos de consulta, tratamiento, actualización del historial y reportes. Definir exactamente qué usuario puede acceder a cada dato.</p>
-  <h3 style="margin-top:28px">Descomposición de procesos de nivel superior</h3>
-  <div class="grid grid-3">
-   <article class="card"><div class="number">P1</div><h3>Gestionar pacientes</h3><p>Registrar, consultar y actualizar datos de identificación y contacto necesarios.</p></article>
-   <article class="card"><div class="number">P2</div><h3>Gestionar citas</h3><p>Registrar solicitudes, asignar fecha y hora, cambiar estado y consultar agenda.</p></article>
-   <article class="card"><div class="number">P3</div><h3>Registrar atención clínica</h3><p>Documentar consulta, evaluación, diagnóstico y tratamiento por un profesional autorizado.</p></article>
-   <article class="card"><div class="number">P4</div><h3>Consultar historial</h3><p>Recuperar registros clínicos relacionados con el paciente, respetando permisos.</p></article>
-   <article class="card"><div class="number">P5</div><h3>Administrar usuarios</h3><p>Gestionar cuentas, roles y permisos según responsabilidades.</p></article>
-   <article class="card"><div class="number">P6</div><h3>Generar reportes</h3><p>Obtener resúmenes administrativos, citas y actividad registrada sin exponer datos innecesarios.</p></article>
-  </div>
-  <h3 style="margin-top:28px">Almacenes de datos propuestos</h3>
-  <div class="table-wrap"><table><thead><tr><th>Código</th><th>Almacén</th><th>Información principal</th></tr></thead><tbody>
-   <tr><td>D1</td><td>Pacientes</td><td>Identificador interno, datos de contacto y estado del registro.</td></tr>
-   <tr><td>D2</td><td>Citas</td><td>Paciente, fecha, hora, motivo general y estado de la cita.</td></tr>
-   <tr><td>D3</td><td>Historial clínico</td><td>Antecedentes relevantes, consultas, diagnósticos y observaciones clínicas.</td></tr>
-   <tr><td>D4</td><td>Tratamientos</td><td>Procedimiento indicado o realizado, fechas y seguimiento.</td></tr>
-   <tr><td>D5</td><td>Usuarios y roles</td><td>Cuentas, permisos y datos de auditoría necesarios.</td></tr>
-  </tbody></table></div>
-   <h3 style="margin-top:28px">Diagramas de Flujo de datos (DFD)</h3>
-   <div class="diagram">
-   <ul>
-     <li>DFD Nivel O</li>
-     <div><img src="imagenes/nivel0.jpg"
-     alt="Diagrama UML del sistema dentadalia"
-     style="max-width:100%; height:auto;"></div>
-     <li>DFD Nivel 1</li>
-     <div><img src="imagenes/nivel1.jpg"
-     alt="Diagrama UML del sistema dentadalia"
-     style="max-width:100%; height:auto;"></div>
-     <li>DFD Nivel 2</li>
-     <div><img src="imagenes/nivel2.jpg"
-     alt="Diagrama UML del sistema dentadalia"
-     style="max-width:100%; height:auto;"></div>
-   </ul>
-    </div>
-   
- </div>
-</section>
-
-<section class="section section-white" id="uml">
- <div class="container">
-  <div class="section-head"><div class="kicker">III · Análisis y diseño orientado a objetos</div><h2>Modelo UML preliminar</h2><p class="lead">Los diagramas incluidos ayudan a explicar nuestra propuesta. Para la versión académica final, nuestro grupo debe revisar relaciones, multiplicidades y notación con nustro docente.</p></div>
- <div><img src="imagenes/uml-previo.png"
-     alt="Diagrama UML del sistema dentadalia"
-     style="max-width:100%; height:auto;"></div>
-  <h3>Actores y casos de uso</h3>
-  <div class="grid grid-3">
-   <article class="card"><div class="icon">🧑‍⚕️</div><h3>Odontólogo</h3><p>Consulta historial clínico, registra atención, actualiza diagnósticos y tratamientos, y revisa citas relacionadas con su práctica.</p></article>
-   <article class="card"><div class="icon">🧑‍💻</div><h3>Personal administrativo</h3><p>Registra pacientes, agenda citas y consulta información administrativa autorizada.</p></article>
-   <article class="card"><div class="icon">🔐</div><h3>Administrador del sistema</h3><p>Gestiona usuarios, roles y configuración. No obtiene automáticamente acceso clínico si su función no lo requiere.</p></article>
-  </div>
-  <h3 style="margin-top:28px">Diagrama de clases conceptual</h3>
-  <div class="diagram">
-   <div class="class-diagram">
-    <div class="uml-class"><h4>Paciente</h4><div>- pacienteId: int<br>- nombre: String<br>- contacto: String</div><div>+ actualizarDatos()<br>+ consultarHistorial()</div></div>
-    <div class="uml-class"><h4>Cita</h4><div>- citaId: int<br>- fechaHora: DateTime<br>- estado: EstadoCita</div><div>+ programar()<br>+ cambiarEstado()</div></div>
-    <div class="uml-class"><h4>Odontologo</h4><div>- odontologoId: int<br>- nombre: String<br>- especialidad: String</div><div>+ registrarAtencion()<br>+ indicarTratamiento()</div></div>
-    <div class="uml-class"><h4>HistorialClinico</h4><div>- historialId: int<br>- fechaApertura: Date<br>- antecedentes: Text</div><div>+ agregarConsulta()<br>+ obtenerResumen()</div></div>
-    <div class="uml-class"><h4>Consulta</h4><div>- consultaId: int<br>- fecha: DateTime<br>- motivo: String<br>- observaciones: Text</div><div>+ registrarDiagnostico()<br>+ guardarNotas()</div></div>
-    <div class="uml-class"><h4>Tratamiento</h4><div>- tratamientoId: int<br>- descripcion: String<br>- fecha: Date<br>- estado: String</div><div>+ registrarPlan()<br>+ actualizarSeguimiento()</div></div>
-   </div>
-  </div>
-  <p class="small">Un paciente puede tener muchas citas y consultas; cada cita corresponde a un paciente y puede asociarse a un odontólogo; un historial clínico pertenece a un paciente y reúne sus consultas; una consulta puede documentar uno o varios tratamientos. Las multiplicidades seran representadas explícitamente en el diagrama final.</p>
-  <h3 style="margin-top:28px">Flujo de caso de uso: registrar una consulta</h3>
-  <div class="diagram">
-   <div class="flow">
-    <div class="flow-node">Odontólogo inicia sesión</div><div class="arrow">→</div><div class="flow-node">Busca al paciente</div><div class="arrow">→</div><div class="flow-node">Revisa historial</div><div class="arrow">→</div><div class="flow-node">Registra consulta y guarda</div>
-   </div>
-  </div>
-  <div class="grid grid-2" style="margin-top:18px">
-   <article class="card"><h3>Precondiciones</h3><ul class="list-check"><li>El usuario ha iniciado sesión.</li><li>El usuario tiene permiso para registrar atención clínica.</li><li>El paciente existe o se registra según el procedimiento definido.</li></ul></article>
-   <article class="card"><h3>Resultado esperado</h3><p>La consulta queda asociada al paciente, con fecha, profesional y contenido clínico necesario; el sistema confirma el registro y conserva trazabilidad de la modificación.</p></article>
-  </div>
- </div>
-</section>
-
-<section class="section" id="propuesta">
- <div class="container">
-  <div class="section-head"><div class="kicker">Propuesta del sistema</div><h2>Funcionalidades y requisitos</h2></div>
-  <h3>Requisitos funcionales</h3>
-  <div class="table-wrap"><table><thead><tr><th>Código</th><th>Requisito</th><th>Prioridad inicial</th></tr></thead><tbody>
-   <tr><td>RF-01</td><td>El sistema permitirá registrar, consultar y actualizar pacientes.</td><td>Alta</td></tr>
-   <tr><td>RF-02</td><td>El sistema permitirá crear, reprogramar y cancelar citas.</td><td>Alta</td></tr>
-   <tr><td>RF-03</td><td>El sistema permitirá consultar el historial clínico de un paciente a usuarios autorizados.</td><td>Alta</td></tr>
-   <tr><td>RF-04</td><td>El odontólogo podrá registrar consultas y observaciones clínicas.</td><td>Alta</td></tr>
-   <tr><td>RF-05</td><td>El odontólogo podrá registrar tratamientos y su seguimiento.</td><td>Alta</td></tr>
-   <tr><td>RF-06</td><td>El sistema permitirá administrar usuarios, roles y permisos.</td><td>Alta</td></tr>
-   <tr><td>RF-07</td><td>El sistema podrá generar reportes básicos de citas y actividad registrada.</td><td>Media</td></tr>
-   <tr><td>RF-08</td><td>El sistema registrará eventos relevantes de creación y modificación de datos.</td><td>Media</td></tr>
-  </tbody></table></div>
-  <h3 style="margin-top:28px">Requisitos no funcionales</h3>
-  <div class="grid grid-3">
-   <article class="card"><h3>Seguridad</h3><p>Autenticación, permisos por rol, sesiones seguras y acceso restringido a datos clínicos.</p></article>
-   <article class="card"><h3>Privacidad</h3><p>Recopilar solo datos necesarios y evitar que información clínica aparezca en páginas públicas o reportes abiertos.</p></article>
-   <article class="card"><h3>Usabilidad</h3><p>Formularios claros, navegación consistente, mensajes de validación y búsqueda comprensible.</p></article>
-   <article class="card"><h3>Integridad</h3><p>Validar campos obligatorios y mantener relaciones consistentes entre pacientes, citas y consultas.</p></article>
-   <article class="card"><h3>Disponibilidad</h3><p>Definir copias de seguridad y procedimientos de recuperación apropiados para el entorno de uso.</p></article>
-   <article class="card"><h3>Mantenibilidad</h3><p>Organizar el sistema por módulos y documentar modelos, reglas y cambios.</p></article>
-  </div>
-  <h3 style="margin-top:28px">Módulos previstos</h3>
-  <div class="grid grid-4">
-   <article class="card"><div class="icon">👥</div><h3>Pacientes</h3><p>Registro y consulta.</p></article>
-   <article class="card"><div class="icon">📅</div><h3>Citas</h3><p>Agenda y estados.</p></article>
-   <article class="card"><div class="icon">🦷</div><h3>Historial clínico</h3><p>Consultas y antecedentes.</p></article>
-   <article class="card"><div class="icon">📝</div><h3>Tratamientos</h3><p>Plan y seguimiento.</p></article>
-  </div>
-  <p class="small">Hasta el momento la versión actual es una propuesta documental de análisis y diseño. No incluye conexión a una base de datos ni procesamiento real de datos de pacientes.</p>
- </div>
-</section>
-
-<section class="section section-white" id="seguridad">
- <div class="container">
-  <div class="section-head"><div class="kicker">Consideraciones transversales</div><h2>Seguridad, privacidad y uso responsable</h2></div>
-  <div class="grid grid-2">
-   <article class="card"><h3>Protección de información clínica</h3><p>El historial clínico contiene información sensible. somos consientes de la responsabilidad que eso implica, permisos mínimos necesarios, autenticación, registro de accesos, copias de seguridad y procedimientos para corregir errores, somos agradecidos con la confianza que se nos esta dando.</p></article>
-   <article class="card"><h3>Publicación del sitio académico</h3><p>Este sitio está pensado para presentar el proyecto y sus modelos, no para almacenar historias clínicas reales. No publicar nombres, teléfonos, fotografías, diagnósticos ni capturas de pacientes.</p></article>
-  </div>
- </div>
-</section>
-
-<section class="section" id="conclusiones">
- <div class="container">
-  <div class="section-head"><div class="kicker">Cierre del proyecto</div><h2>Conclusiones y resultados esperados</h2></div>
-  <div class="grid grid-2">
-   <article class="card"><h3>Resultados esperados</h3><ul class="list-check"><li>Documentación clara del problema y de las necesidades del consultorio.</li><li>Requisitos funcionales y no funcionales definidos y priorizados.</li><li>Modelos estructurados de los procesos y flujos de información.</li><li>Diagramas UML coherentes con los requisitos identificados.</li><li>Una propuesta organizada que pueda servir como base para una futura implementación.</li></ul></article>
-   <article class="card"><h3>Conclusión preliminar</h3><p>El análisis y diseño de un sistema de control de gestión e historial clínico puede ayudar a comprender cómo integrar los procesos administrativos y clínicos de un consultorio dental. La aplicación complementaria del análisis estructurado y UML permite estudiar los flujos de información y representar la estructura y el comportamiento de la solución. La conclusión definitiva debe redactarse al terminar la investigación y validar los modelos.</p></article>
-  </div>
- </div>
-</section>
-
-<section class="section section-white" id="referencias">
- <div class="container">
-  <div class="section-head"><div class="kicker">Documentación final</div><h2>Referencias y datos del equipo</h2><p class="lead">Para mayor referencia acerca del consultorio su ubicacion es Av. A, calle H-2, zona nuevos horizontes I </p></div>
-  <div class="grid grid-2">
-   <article class="card">
-    <h3>Referencias bibliográficas por completar</h3>
-    <ul class="reference-list">
-     <li>Material de la asignatura: <em>Proyecto de Análisis y Diseño de Sistemas, segundo semestre 2026</em> (consigna proporcionada por el docente).</li>
-     
-    </ul>
-    <p class="small">_</p>
-   </article>
-   <article class="card">
-    <h3>Identificación académica</h3>
-  
-    <p><strong>Institución:</strong> DENTALIA</p>
-    <p><strong>Asignatura:</strong> Análisis y Diseño de Sistemas</p>
-    <p><strong>Docente:</strong> Lic. Miguel Cotaña Mier</p>
-    <p><strong>Integrantes:</strong> <ul>
-      <li>Apaza Cauna Gabriela</li>
-      <li>Huanca Condori Keyla Estrella</li>
-      <li>Limachi Mamani Liz Evelin</li>
-    <li>Mamani Chavez Nataly Pamela</li>
-    </ul></p>
-    <p><strong>Gestión:</strong> Segundo semestre de 2026</p>
-   
-   </article>
-  </div>
- </div>
 </section>
 </main>
-
-<footer class="footer">
- <div class="footer-inner">
-  <div><strong>Dentalia</strong><p>Proyecto académico de Análisis y Diseño de Sistemas · 2026</p><p>Control de Gestión e Historial Clínico para un Consultorio Dental</p></div>
-  <div><a class="toplink" href="#inicio">Volver al inicio ↑</a><p class="small" style="color:#b9ccd7">Sitio informativo; no recibe ni almacena datos clínicos.</p></div>
- </div>
-</footer>
+<footer><div><b>DENTALIA</b><p>Control de Gestión e Historial Clínico para un Consultorio Dental.</p><p>Proyecto académico · Análisis y Diseño de Sistemas</p></div></footer>
+<div class="modalbg" id="modal"><div class="modal"><button class="close" id="close">✕</button><h2>Ingreso de demostración</h2><p>Selecciona un rol para visualizar una pantalla de ejemplo.</p>
+<form id="form"><div class="field"><label for="role">Tipo de usuario</label><select id="role" required><option value="">Seleccionar rol</option><option>Paciente</option><option>Odontólogo</option><option>Recepcionista</option></select></div>
+<div class="field"><label for="user">Usuario de demostración</label><input id="user" required placeholder="Escribe cualquier usuario"></div><div class="field"><label for="pass">Contraseña de demostración</label><input id="pass" type="password" required placeholder="Escribe cualquier contraseña"></div><button class="btn" style="width:100%">Ingresar</button></form>
+<div class="result" id="result"></div><div class="note">Este ingreso es solo demostrativo: no valida usuarios ni guarda contraseñas. Para un login real se necesita servidor, base de datos y controles de seguridad.</div></div></div>
 <script>
-  const menuBtn = document.getElementById('menuBtn');
-  const navlinks = document.getElementById('navlinks');
-  menuBtn.addEventListener('click', () => {
-    const opened = navlinks.classList.toggle('open');
-    menuBtn.setAttribute('aria-expanded', String(opened));
+
+const nav=document.getElementById('nav');
+const homeView=document.getElementById('home-view');
+const materialView=document.getElementById('material-view');
+const dropdowns=[...document.querySelectorAll('.dropdown')];
+
+document.getElementById('menu').onclick=()=>nav.classList.toggle('mobile');
+
+/* En pantallas táctiles el botón abre/cierra el menú; en escritorio basta pasar el cursor. */
+document.querySelectorAll('.dropdown>.dropbtn').forEach(b=>{
+  b.onclick=()=>b.parentElement.classList.toggle('open');
+});
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.dropdown')) dropdowns.forEach(d=>d.classList.remove('open'));
+});
+
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));
+  document.querySelectorAll('.tabcontent').forEach(x=>x.classList.toggle('active',x.id===b.dataset.show));
+});
+
+const descriptions = {
+  "Modelo ambiental":"Presenta el entorno de Dentalia, sus límites y la relación del sistema con las entidades externas.",
+  "Diagrama de contexto":"Muestra el sistema Dentalia como un proceso general y sus intercambios de información con los actores externos.",
+  "DFD niveles 0, 1 y 2":"Describe los procesos del sistema y cómo circulan los datos entre procesos, almacenes y entidades externas.",
+  "DFD nivel 0":"Vista general de los procesos principales y los flujos de información del sistema.",
+  "DFD nivel 1":"Descomposición de los procesos principales en actividades y flujos de datos más detallados.",
+  "DFD nivel 2":"Detalle de un proceso específico y de sus flujos internos de información.",
+  "Entidad–relación":"Representa las entidades de la base de datos, sus atributos y las relaciones entre ellas.",
+  "Diagrama entidad-relación":"Representa las entidades de la base de datos, sus atributos y las relaciones entre ellas.",
+  "Diccionario de datos":"Contiene la descripción, estructura y significado de los datos utilizados por Dentalia.",
+  "Casos de uso":"Identifica los actores del sistema y las funcionalidades con las que interactúan.",
+  "Diagrama de casos de uso":"Identifica los actores del sistema y las funcionalidades con las que interactúan.",
+  "Diagrama de clases":"Representa las clases del sistema, sus atributos, operaciones y relaciones.",
+  "Diagramas de secuencia":"Muestran el intercambio de mensajes entre actores y objetos a lo largo del tiempo.",
+  "Diagramas de actividad":"Representan el flujo de actividades y decisiones de un proceso del sistema."
+};
+
+function slugify(value){
+  return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+}
+function showMaterial(name, category, updateHistory=true){
+  const isUml = category === 'uml';
+  document.getElementById('material-category').textContent = isUml ? 'DISEÑO UML' : 'ANÁLISIS ESTRUCTURADO';
+  document.getElementById('material-title').textContent = name;
+  document.getElementById('material-panel-title').textContent = name;
+  document.getElementById('material-description').textContent =
+    descriptions[name] || 'Consulta el contenido correspondiente a este apartado del proyecto Dentalia.';
+  homeView.hidden = true;
+  materialView.hidden = false;
+  window.scrollTo({top:0,behavior:'smooth'});
+  dropdowns.forEach(d=>d.classList.remove('open'));
+  nav.classList.remove('mobile');
+  if(updateHistory) history.pushState({view:'material',name,category},'', '#material/'+slugify(name));
+}
+function showHome(updateHistory=true, target=''){
+  materialView.hidden = true;
+  homeView.hidden = false;
+  dropdowns.forEach(d=>d.classList.remove('open'));
+  nav.classList.remove('mobile');
+  if(updateHistory) history.pushState({view:'home'},'', target ? '#'+target : '#inicio');
+  if(target){
+    requestAnimationFrame(()=>document.getElementById(target)?.scrollIntoView({behavior:'smooth',block:'start'}));
+  } else window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.material-link').forEach(b=>{
+  b.addEventListener('click',()=>showMaterial(b.dataset.material,b.dataset.category));
+});
+document.getElementById('back-home').onclick=()=>showHome();
+
+document.querySelectorAll('nav a, .brand, #home-view a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const target=a.getAttribute('href')?.slice(1);
+    if(!target) return;
+    if(materialView.hidden) return;
+    e.preventDefault();
+    showHome(true,target);
   });
-  navlinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-    navlinks.classList.remove('open');
-    menuBtn.setAttribute('aria-expanded', 'false');
-  }));
+});
+window.addEventListener('popstate',()=>{
+  const match=location.hash.match(/^#material\/(.+)$/);
+  if(match){
+    const key=decodeURIComponent(match[1]);
+    const button=[...document.querySelectorAll('.material-link')].find(b=>slugify(b.dataset.material)===key);
+    if(button) showMaterial(button.dataset.material,button.dataset.category,false);
+  } else {
+    materialView.hidden=true;
+    homeView.hidden=false;
+  }
+});
+const modal=document.getElementById('modal');document.getElementById('open').onclick=()=>modal.classList.add('show');document.getElementById('close').onclick=()=>modal.classList.remove('show');modal.onclick=e=>{if(e.target===modal)modal.classList.remove('show')};
+document.getElementById('form').onsubmit=e=>{e.preventDefault();const role=document.getElementById('role').value,user=document.getElementById('user').value;const msg={Paciente:'Aquí se mostrarán sus citas y la información personal permitida.',Odontólogo:'Aquí se mostrará la agenda y el acceso autorizado a historiales clínicos.',Recepcionista:'Aquí se mostrarán pacientes, citas, pagos y reportes administrativos.'};const r=document.getElementById('result');r.textContent='Bienvenido/a, '+user+'. '+msg[role];r.classList.add('show')};
 </script>
-</body>
-</html>
+</body></html>
