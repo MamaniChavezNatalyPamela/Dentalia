@@ -159,9 +159,9 @@ footer p{color:#d5f0f2}
 <div class="item"><div><b>Diagramas de actividad</b><small>Flujo de actividades.</small></div><button class="smallbtn material-link" data-material="Diagramas de actividad" data-category="uml">Ver material</button></div></div>
 <div class="viewer"><strong>Área de visualización UML</strong>Selecciona “Ver material” para mostrar aquí el espacio destinado al diagrama.</div></div></div></section>
 <section id="roles"><div class="head"><span class="kicker">03 · Acceso al sistema</span><h2>Roles y responsabilidades</h2><p>El acceso a la información se organiza según las funciones de cada participante.</p></div>
-<div class="grid"><article class="card"><div class="ico">☺</div><h3>Paciente</h3><p>Solicita o consulta sus citas y revisa la información propia que el sistema permita mostrar.</p></article>
-<article class="card"><div class="ico">✚</div><h3>Odontólogo</h3><p>Consulta la agenda y la información clínica autorizada; registra consultas, diagnósticos y tratamientos.</p></article>
-<article class="card"><div class="ico">▤</div><h3>Recepcionista</h3><p>Registra pacientes, gestiona citas, pagos y comprobantes, y consulta reportes administrativos.</p></article></div></section>
+<div class="grid"><article class="card"><div class="ico">☺</div><h3>Paciente</h3><p>Solicita o consulta sus citas y puede consultar su propio historial clínico.</p></article>
+<article class="card"><div class="ico">✚</div><h3>Odontólogo</h3><p>Registra y consulta información clínica, diagnósticos, tratamientos y su seguimiento.</p></article>
+<article class="card"><div class="ico">▤</div><h3>Recepcionista</h3><p>Registra y actualiza pacientes, gestiona citas y registra pagos</p></article></div></section>
 <section id="tutoriales"><div class="head"><span class="kicker">04 · Recursos de apoyo</span><h2>Tutoriales y documentación</h2><p>Se pueden publicar videos breves que expliquen cómo se elaboró cada diagrama.</p></div>
 <div class="two"><article class="card"><div class="ico">▶</div><h3>Diagramas estructurados</h3><p>Espacio para insertar videos sobre modelo ambiental, contexto y DFD.</p></article><article class="card"><div class="ico">▶</div><h3>Diagramas UML</h3><p>Espacio para insertar videos sobre casos de uso, clases y secuencia.</p></article></div>
 <div class="note">Antes de publicar la versión final, reemplacen los espacios de ejemplo por los diagramas, documentos y videos definitivos.</div></section>
@@ -218,12 +218,12 @@ document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
 
 const descriptions = {
   "Modelo ambiental":"Presenta el entorno de Dentalia, sus límites y la relación del sistema con las entidades externas.",
-  "Diagrama de contexto":"Muestra el sistema Dentalia como un proceso general y sus intercambios de información con los actores externos.",
+  "Diagrama de contexto":"Este diagrama representa a Dentalia como un único sistema y muestra cómo intercambia información con sus tres entidades externas.",
   "DFD niveles 0, 1 y 2":"Describe los procesos del sistema y cómo circulan los datos entre procesos, almacenes y entidades externas.",
-  "DFD nivel 0":"Vista general de los procesos principales y los flujos de información del sistema.",
-  "DFD nivel 1":"Descomposición de los procesos principales en actividades y flujos de datos más detallados.",
-  "DFD nivel 2":"Detalle de un proceso específico y de sus flujos internos de información.",
-  "Entidad–relación":"Representa las entidades de la base de datos, sus atributos y las relaciones entre ellas.",
+  "DFD nivel 0":"En este nivel se representan los procesos principales del sistema y los almacenes de información que utilizan.",
+  "DFD nivel 1":"En este nivel se descomponen los procesos principales para mostrar con mayor detalle las actividades que se realizan dentro del sistema.",
+  "DFD nivel 2":"Para el nivel 2 desarrollaremos el proceso P3: Gestionar historial clinico, porque es uno de los procesos centrales del sistema Dentalia.",
+  "Entidad–relación":"El diagrama entidad-relación representa la información que Dentalia necesita almacenar y las relaciones entre sus entidades.",
   "Diagrama entidad-relación":"Representa las entidades de la base de datos, sus atributos y las relaciones entre ellas.",
   "Diccionario de datos":"Contiene la descripción, estructura y significado de los datos utilizados por Dentalia.",
   "Casos de uso":"Identifica los actores del sistema y las funcionalidades con las que interactúan.",
