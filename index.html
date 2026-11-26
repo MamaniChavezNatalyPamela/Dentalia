@@ -146,16 +146,8 @@ footer p{color:#d5f0f2}
 <div class="tabcontent active" id="estructurado"><div class="items">
 <div class="item"><div><b>Modelo ambiental</b><small>Entorno y límites del sistema.</small></div><button class="smallbtn material-link" data-material="Modelo ambiental" data-category="estructurado">Ver material</button></div>
 <div class="item"><div><b>Diagrama de contexto</b><small>Actores y sistema principal.</small></div><button class="smallbtn material-link" data-material="Diagrama de contexto" data-category="estructurado">Ver material</button></div>
-<div class="item"><div><b>DFD nivel 0</b><small>Procesos y flujos generales.</small></div><button class="smallbtn material-link" data-material="DFD nivel 0" data-category="estructurado">Ver material</button> <p><div><img src="img/Nivel0.png"
-     alt="Diagrama UML del sistema dentadalia"
-     style="max-width:100%; height:auto;"></div></p>
-      <p><div><img src="img/Nivel1.png"
-     alt="Diagrama UML del sistema dentadalia"
-     style="max-width:100%; height:auto;"></div></p>
-   
-    <p><div><img src="img/Nivel2.png"
-     alt="Diagrama UML del sistema dentadalia"
-     style="max-width:100%; height:auto;"></div></p></div>
+<div class="item"><div><b>DFD nivel 0</b><small>Procesos y flujos generales.</small></div><button class="smallbtn material-link" data-material="DFD nivel 0" data-category="estructurado">Ver material</button> </div>
+
 <div class="item"><div><b>DFD nivel 1</b><small>Descomposición de procesos.</small></div><button class="smallbtn material-link" data-material="DFD nivel 1" data-category="estructurado">Ver material</button></div>
 <div class="item"><div><b>DFD nivel 2</b><small>Detalle de un proceso.</small></div><button class="smallbtn material-link" data-material="DFD nivel 2" data-category="estructurado">Ver material</button></div>
 <div class="item"><div><b>Entidad–relación</b><small>Entidades y relaciones de datos.</small></div><button class="smallbtn material-link" data-material="Diagrama entidad-relación" data-category="estructurado">Ver material</button></div>
@@ -191,10 +183,17 @@ footer p{color:#d5f0f2}
       <span class="material-tag">Dentalia · Análisis y diseño</span>
     </div>
     <div class="material-placeholder" id="material-placeholder">
-      <div class="material-placeholder-icon"></div>
-      
-     
-       </div>
+    <img id="material-image"
+         src=""
+         alt="Diagrama de Dentalia"
+         style="display:none; max-width:100%; height:auto; border-radius:12px;">
+
+    <div id="material-empty">
+        <div class="material-placeholder-icon">▧</div>
+        <h3>Espacio para el material</h3>
+        <p>Selecciona una sección para visualizar su diagrama.</p>
+    </div>
+</div>
   </div>
 </section>
 </main>
@@ -246,6 +245,23 @@ function slugify(value){
   return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
     .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 }
+const materialImages = {
+    "Modelo ambiental": "imagenes/modelo-ambiental.png",
+    "Diagrama de contexto": "img/DiagramaContexto.png",
+    "DFD nivel 0": "img/Nivel0.png",
+    "DFD nivel 1": "img/Nivel1.png",
+    "DFD nivel 2": "img/Nivel2.png",
+    "Entidad–relación": "img/EntidadRelacion.png",
+    "Diagrama entidad-relación": "img/EntidadRelacion.png",
+    "Diccionario de datos": "img/diccionario-datos.png",
+    "Casos de uso": "img/casos-de-uso.png",
+    "Diagrama de casos de uso": "img/casos-de-uso.png",
+    "Diagrama de clases": "img/diagrama-clases.png",
+    "Diagramas de secuencia": "img/diagramas-secuencia.png",
+    "Diagramas de actividad": "img/diagramas-actividad.png"
+};
+
+
 function showMaterial(name, category, updateHistory=true){
   const isUml = category === 'uml';
   document.getElementById('material-category').textContent = isUml ? 'DISEÑO UML' : 'ANÁLISIS ESTRUCTURADO';
@@ -259,6 +275,20 @@ function showMaterial(name, category, updateHistory=true){
   dropdowns.forEach(d=>d.classList.remove('open'));
   nav.classList.remove('mobile');
   if(updateHistory) history.pushState({view:'material',name,category},'', '#material/'+slugify(name));
+
+  const image = document.getElementById("material-image");
+const empty = document.getElementById("material-empty");
+
+const imagePath = materialImages[name];
+
+if (imagePath) {
+    image.src = imagePath;
+    image.style.display = "block";
+    empty.style.display = "none";
+} else {
+    image.style.display = "none";
+    empty.style.display = "block";
+}
 }
 function showHome(updateHistory=true, target=''){
   materialView.hidden = true;
